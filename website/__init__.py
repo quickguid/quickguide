@@ -9,8 +9,8 @@ def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'hjshjhdjah kjshkjdhjs'
     
-    # Use JAWSDB_URL if available, otherwise fallback to localhost
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('JAWSDB_URL', 'mysql://root:Ar0966678@localhost/adobe5')
+    # Temporarily use SQLite in-memory database for testing
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
     app.config['USER_EMAIL_SENDER_EMAIL'] = 'Ar0966678@gmail.com'
     app.config['USER_ENABLE_EMAIL'] = True
 
