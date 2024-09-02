@@ -1,1 +1,1 @@
-web: gunicorn app:app
+web: gunicorn C:\Users\asaid\Desktop\quickguide\quickguide\website\__init__.py:app
