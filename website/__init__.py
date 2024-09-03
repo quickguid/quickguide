@@ -9,8 +9,8 @@ def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'hjshjhdjah kjshkjdhjs'
     
-    # Use JAWSDB_URL if available, otherwise fallback to localhost
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('JAWSDB_URL', 'mysql://root:Ar0966678@localhost/adobe5')
+    # Temporarily use SQLite in-memory database for testing
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
     app.config['USER_EMAIL_SENDER_EMAIL'] = 'Ar0966678@gmail.com'
     app.config['USER_ENABLE_EMAIL'] = True
 
@@ -34,19 +34,5 @@ def create_app():
     @login_manager.user_loader
     def load_user(id):
         return User.query.get(int(id))
-
-    # Test database connection route
-    @app.route('/test-db')
-    def test_db():
-        try:
-            # Query the first user as a test
-            user = User.query.first()
-            if user:
-                return f"Connected to the database! First user: {user.first_name} {user.last_name}"
-            else:
-                return "Connected to the database, but no users found."
-        except Exception as e:
-            return f"Failed to connect to the database. Error: {str(e)}"
-
 
     return app
