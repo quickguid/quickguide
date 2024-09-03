@@ -10,8 +10,9 @@ def create_app():
     app.config['SECRET_KEY'] = 'hjshjhdjah kjshkjdhjs'
     
     # Temporarily use SQLite in-memory database for testing
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
-    app.config['USER_EMAIL_SENDER_EMAIL'] = 'Ar0966678@gmail.com'
+    app.config['SECRET_KEY'] = 'hjshjhdjah kjshkjdhjs'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://fb7d44wlpxshifyo:so77r3i5bv82rt89@d6q8diwwdmy5c9k9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/jjtl9wgwpao1sh9w'
+    app.config['USER_EMAIL_SENDER_EMAIL'] = 'razanali1421@gmail.com'
     app.config['USER_ENABLE_EMAIL'] = True
 
     db.init_app(app)
