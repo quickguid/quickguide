@@ -2,6 +2,10 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from dotenv import load_dotenv  # Import the load_dotenv function
+
+# Load environment variables from the .env file
+load_dotenv()
 
 db = SQLAlchemy()
 
@@ -47,6 +51,5 @@ def create_app():
                 return "Connected to the database, but no users found."
         except Exception as e:
             return f"Failed to connect to the database. Error: {str(e)}"
-
 
     return app
