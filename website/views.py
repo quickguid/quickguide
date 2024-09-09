@@ -5,7 +5,7 @@ from flask_login import current_user,  login_required
 from functools import wraps
 from flask import render_template
 from flask import  request, jsonify
-from .models import UserAction, ACCESS, Lesson, UserAction
+from .models import UserAction, ACCESS, Lesson, UserAction, User
 from .auth import session
 from . import db
 from datetime import datetime
@@ -44,17 +44,64 @@ def lesson():
 @requires_access_level(ACCESS['admin']) 
 @login_required
 def admin_dashboard():
-    actions_data = db.session.query(UserAction).all()
-    return render_template('admin.html', actions_data=actions_data)
+    users = db.session.query(User).all()
+    lessons = db.session.query(Lesson).all()
+    return render_template('admin.html', users=users, lessons=lessons)
+
+
+@views.route('/admin/user/<user_id>')
+@requires_access_level(ACCESS['admin']) 
+@login_required
+def admin_user(user_id):
+    user = db.session.query(User).filter_by(id=user_id)[0]
+    #to get the lessons that user contribute in 
+    #ChatGPT wrote this code not me :> 
+    # Query to get all UserActions for the specific user_id
+    user_actions = db.session.query(UserAction).filter_by(user_id=user_id).all()
+    # Extract lesson_ids from the user actions
+    lesson_ids = [action.lesson_id for action in user_actions]
+    # Query to get all lessons that match the lesson_ids
+    lessons = db.session.query(Lesson).filter(Lesson.id.in_(lesson_ids)).all()
+    return render_template('admin_user.html', user= user, lessons= lessons)
+
+@views.route('/admin/lesson/<lesson_id>')
+@requires_access_level(ACCESS['admin']) 
+@login_required
+def admin_lessons(lesson_id):
+    #find THE lesson
+    lesson = db.session.query(Lesson).filter_by(id=lesson_id)[0]
+    #find the actions the belong to THAT lesson
+    #added the join to show the name of the user in table not only its id 
+    user_actions = db.session.query(UserAction, User).join(User, UserAction.user_id == User.id).filter(UserAction.lesson_id == lesson_id).all()
+    print(user_actions)
+    title = f"سجلات الأحداث  {lesson.name}"
+    return render_template('actions.html', user_actions= user_actions, title=title)
+
+
+@views.route('/admin/<user_id>/<lesson_id>')
+@requires_access_level(ACCESS['admin']) 
+@login_required
+def admin_user_lesson(user_id,lesson_id):
+    #find the user
+    user = db.session.query(User).filter_by(id=user_id).first() 
+    lesson = db.session.query(Lesson).filter_by(id=lesson_id).first()
+    user_actions = db.session.query(UserAction, User).join(User, UserAction.user_id == User.id).filter(UserAction.user_id == user_id, UserAction.lesson_id == lesson_id).all() 
+    title = f"سجلات الأحداث {lesson.name} للمستخدم {user.first_name} {user.last_name}"
+    return render_template('actions.html' ,user_actions= user_actions, title=title)
+
 
 
 @views.route('/submit', methods=['POST'])
 @login_required
 def submit():
+    print("here")
     data = request.get_json()
+    print(request.get_json())
+    print(data)
     lesson_id = data.get('lesson_id')
     action_id = data.get('action_id')
     time_clicked_str = data.get('time_clicked')
+    print(lesson_id)
     time_clicked = datetime.strptime(time_clicked_str, '%Y-%m-%dT%H:%M:%S.%fZ')
     user_id = current_user.id
     session_id = session.get('session_id')
@@ -70,39 +117,4 @@ def show_lessons(item_id):
     # Fetch the lesson from the database based on item_id
     lesson = Lesson.query.get(item_id)
     return render_template('show_lesson.html', lesson=lesson)
-
-
-@views.route('/get_user_actions/<int:user_id>')
-@login_required
-@requires_access_level(ACCESS['admin'])
-def get_user_actions(user_id):
-    user_actions = db.session.query(UserAction).filter_by(user_id=user_id).all()
-    
-    # Convert the actions to a list of dictionaries
-    actions_data = [{
-        'user_id': action.user_id,
-        'session_id': action.session_id,
-        'lesson_id': action.lesson_id,
-        'action_id': action.action_id,
-        'time_clicked': action.time_clicked.strftime('%Y-%m-%d %H:%M:%S')  # Formatting datetime to string
-    } for action in user_actions]
-    
-    return jsonify(actions_data)
-
-@views.route('/get_all_actions')
-@login_required
-@requires_access_level(ACCESS['admin'])
-def get_all_actions():
-    all_actions = db.session.query(UserAction).all()
-    
-    actions_data = [{
-        'user_id': action.user_id,
-        'session_id': action.session_id,
-        'lesson_id': action.lesson_id,
-        'action_id': action.action_id,
-        'time_clicked': action.time_clicked.strftime('%Y-%m-%d %H:%M:%S')
-    } for action in all_actions]
-    
-    return jsonify(actions_data)
-
 

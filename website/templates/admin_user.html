@@ -38,7 +38,7 @@
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{{ url_for('views.admin_dashboard') }}" class="active">لوحة التحكم </a></li>
+          <li><a href="{{ url_for('views.admin_dashboard') }}"class="active">لوحة التحكم </a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -63,7 +63,7 @@
     <section id="user_action" class="user_action_">
         <!-- Section Title -->
         <div class="container" data-aos="fade-up">
-          <h2>الدورات التدريبية</h2>
+          <h2>الدورات التدريبية للمستخدم {{user.first_name}}<space></space> {{user.last_name}}</h2>
        
         </div><!-- End Section Title -->
 
@@ -79,7 +79,7 @@
             {% for lesson in lessons %}
             <tr>
            
-              <td><a href="{{ url_for('views.admin_lessons', lesson_id=lesson.id) }}" > {{lesson.id}} </a></td>
+              <td><a href="{{ url_for('views.admin_user_lesson',user_id=user.id, lesson_id=lesson.id) }}" > {{lesson.id}} </a></td>
               <td> {{lesson.name}}  </td>
          
             </tr>
@@ -89,36 +89,6 @@
         </table>
       </div>
     </section>
-
-    <section id="user_action" class="user_action_">
-      <!-- Section Title -->
-      <div class="container" data-aos="fade-up">
-        <h2>المستخدمين</h2>
-     
-      </div><!-- End Section Title -->
-    <div class="container">
-
-      <table class="table table-bordered">
-        <thead class="thead-dark rrr">
-          <tr>
-            <th>رقم المستخدم</th>
-            <th>اسم المستخدم</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for user in users %}
-          <tr>
-            <td><a href="{{ url_for('views.admin_user', user_id=user.id) }}" > {{user.id}} </a></td>
-            <td> {{user.first_name}} <space> </space> {{user.last_name}} </td>
-          </tr>
-          {% endfor %}
-          <!-- Add more rows as needed -->
-        </tbody>
-      </table>
-    </div>
-  </section>
-    
-
 
 
   </main>
