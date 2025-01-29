@@ -1,0 +1,322 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+
+.presentation-rectangle {
+    width: 900px;
+    height: 500px;
+    background: linear-gradient(to right, #ADD8E6, #4682B4);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+
+/* Slide 1 specific styles remain unchanged */
+.presentation-rectangle img {
+    width: 860px;
+    height: 460px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+
+}
+
+.start-button {
+    position: absolute;
+    bottom: 100px;
+    right: 200px;
+    padding: 15px 30px;
+    font-size: 18px;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    background: linear-gradient(to right, #ADD8E6, #4682B4);
+    transition: all 0.3s ease;
+}
+
+.start-button:hover {
+    background: linear-gradient(to right, #4682B4, #ADD8E6);
+    transform: scale(1.1);
+}
+
+/* Slide 2 specific styles */
+#maindesgin {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#maindesgin .main-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+}
+
+#maindesgin .main-content img {
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+
+
+#maindesgin .footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background:linear-gradient(to right, #ADD8E6,  #4682B4);
+    padding: 40px;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    gap: 15px;
+}
+
+#maindesgin .footer button {
+
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+}
+
+#maindesgin .footer button:hover {
+    background-color: #ccc;
+}
+
+#maindesgin .gov {
+position: absolute;
+top: 320px; /* Distance from the bottom */
+right: 30px;  /* Distance from the right */
+}
+
+#maindesgin .gov img {
+height: 200px;
+width: 200px;
+object-fit: contain
+}
+
+/* الحاوية الكاملة */
+.container {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 10px; /* مسافة بين العناصر */
+}
+
+
+/* الحاوية العامة */
+.presentation-container {
+position: relative;
+width: 900px;
+margin: 0 auto;
+margin-top: 50px; /* توفير مساحة للشريط الأزرق */
+}
+
+
+/* النافبار */
+.custom-navigation-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 890px; /* نفس عرض الفيديو */
+    height: 20px; /* تقليل ارتفاع الشريط */
+    margin: 0 auto; /* توسيط الشريط */
+    background-color: #d3d3d3; /* لون خلفية الشريط */
+    padding: 6px 5px; /* مسافة داخلية */
+    
+    }
+
+.custom-nav-btn {
+background: linear-gradient(to bottom, #868686, #646464); /* التدرج من لون رمادي فاتح إلى غامق */
+color: white; /* لون الأيقونة */
+border: 2px solid #d1cfcfe6; /* إطار الزر */
+border-radius: 5px; /* الحواف الدائرية */
+width: 22px; /* عرض الزر */
+height: 22px; /* ارتفاع الزر */
+font-size: 10px; /* حجم النص */
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: background-color 0.3s ease, box-shadow 0.3s ease;
+margin: 0 2px; /* المسافات بين الأزرار */
+
+}
+
+.custom-nav-btn.play-btn {
+width: 50px; /* عرض أكبر لزر التشغيل */
+}
+
+.custom-nav-btn:hover {
+border-color: #0078d7; /* لون الإطار عند التمرير */
+}
+
+
+.custom-progress-container {
+flex: 1;
+height: 15px; /* شريط تقدم رفيع */
+background-color: #868686; /* لون خلفية شريط التقدم */
+border-radius: 3px;
+margin: 0 10px;
+overflow: hidden;
+position: relative;
+}
+
+.custom-progress-bar {
+height: 100%;
+width: 50%; /* نسبة التقدم الافتراضية */
+background-color: #216eac; /* لون شريط التقدم */
+transition: width 0.3s ease;
+}
+
+/*------------- RAZAN------------------*/
+.slide5 .highlight-box {
+    position: absolute;
+    top: 250px;
+    /* Adjust as needed */
+    left: 72%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 80px;
+    border: 2px dashed red;
+    background-color: rgba(255, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.slide5 .highlight-box:hover {
+    border-color: blue;
+    /* Change border color on hover */
+    background-color: rgba(0, 0, 255, 0.1);
+    /* Change background color on hover */
+    transform: translateX(-50%) scale(1.1);
+    /* Slightly enlarge the box */
+}
+
+.slide5 .pointer {
+    position: absolute;
+    top: 260px;
+    /* Adjust to point above the image */
+    left: 58%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    background-image: url('hand-pointer.png');
+    /* Add a pointer image */
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 15;
+}
+
+/* Rectangle with text at the end of the image */
+.text-box {
+    position: absolute;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 842px;
+    height: 5%;
+    color: white;
+    text-align: right;
+    font-size: 16px;
+    background-color: #ADD8E6;
+    font-size: 14px;
+    color:black;
+    padding: 1%
+
+}
+
+.slide7 .pointer {
+    position: absolute;
+    top: 260px;
+    /* Adjust to point above the image */
+    left: 38%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    background-image: url('hand-pointer.png');
+    /* Add a pointer image */
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 15;
+}
+
+#slide8 .pointer {
+    position: absolute;
+    top: 260px;
+    /* Adjust to point above the image */
+    left: 38%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    background-image: url('hand-pointer.png');
+    /* Add a pointer image */
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 15;
+}
+
+#slide8 .highlight-box {
+    position: absolute;
+    top: 170px;
+    /* Adjust as needed */
+    left: 64%;
+    transform: translateX(-50%);
+    width: 97px;
+    height: 90px;
+    border: 2px dashed red;
+    background-color: rgba(255, 0, 0, 0.1);
+    z-index: 10;
+}
+
+#slide8 .highlight-box:hover {
+    border-color: blue;
+    /* Change border color on hover */
+    background-color: rgba(0, 0, 255, 0.1);
+    /* Change background color on hover */
+    transform: translateX(-50%) scale(1.1);
+    /* Slightly enlarge the box */
+}
+
+#slide8 .pointer {
+    position: absolute;
+    top: 200px;
+    /* Adjust to point above the image */
+    left: 58%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    background-image: url('hand-pointer.png');
+    /* Add a pointer image */
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 15;
+}
+
