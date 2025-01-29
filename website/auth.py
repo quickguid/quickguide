@@ -100,6 +100,3 @@ def sign_up():
 
     return render_template("index.html", user=current_user)
 
-@app.route('/new-feature')
-def new_feature():
-    return render_template('first_page.html')
