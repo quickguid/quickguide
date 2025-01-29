@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Slide Change</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <div class="presentation-container">
+
+        <div class="text-bar">
+            <p id="text-bar"></p>
+        </div>
+        
+
+
+        <div class="presentation-rectangle" id="presentation-rectangle">
+            <!-- Slide Content -->
+            <div id="slide1">
+                <img src="/static/x1.png" alt="Presentation Background">
+                <button class="start-button" onclick="navigateForward()">ابدأ</button>
+            </div>
+        </div>
+
+
+
+        <!-- شريط التنقل -->
+        <div class="custom-navigation-bar">
+            <button class="custom-nav-btn" title="Reset" onclick="resetSlideShow()">
+                <i class="fas fa-redo-alt"></i>
+            </button>
+            <button class="custom-nav-btn play-btn" title="Play/Pause" onclick="toggleAudio(this)">&#9658;</button>
+            <button class="custom-nav-btn" title="Backward" onclick="navigateBackward()">
+                <i class="fa-solid fa-backward-step"></i>
+            </button>
+            <button class="custom-nav-btn" title="Forward" onclick="navigateForward()">
+                <i class="fa-solid fa-forward-step"></i>
+            </button>
+
+            <button class="custom-nav-btn" title="Speed" onclick="changePlaybackSpeed()">
+                <i class="fas fa-gauge-simple-high"></i>
+            </button>
+
+            <div class="custom-progress-container">
+                <div class="custom-progress-bar" id="custom-progress-bar"></div>
+            </div>
+            <button class="custom-nav-btn" title="Mute" onclick="toggleMute(this)">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <button class="custom-nav-btn" title="Exit" onclick="navigateToLastSlide()">
+                <i class="fas fa-xmark"></i>
+            </button>
+                    </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
